@@ -1,0 +1,204 @@
+###
+
+GET http://localhost:5000/
+###
+GET http://localhost:5000/products
+
+###
+
+POST http://localhost:5000/products/
+Content-Type: application/json
+
+{
+      "products_id": 1000,
+      "products_quantity": 32,
+      "products_model": "TestProduct-1000",
+      "products_image": "matrox/mg200mms.gif",
+      "products_price": 299.99,
+      "products_date_added": "2022-07-28T08:19:29.000Z",
+      "products_last_modified": null,
+      "products_date_available": null,
+      "products_weight": 23,
+      "products_status": 1,
+      "products_tax_class_id": 1,
+      "manufacturers_id": 1,
+      "products_ordered": 0
+}
+
+
+# {
+#       "products_id": 1000,
+#       "products_quantity": 32,
+#       "products_model": "TestProduct-1000",
+#       "products_image": "matrox/mg200mms.gif",
+#       "products_price": 299.99,
+#       "products_date_added": "2022-07-28T08:19:29.000Z",
+#       "products_last_modified": null,
+#       "products_date_available": null,
+#       "products_weight": 23,
+#       "products_status": 1,
+#       "products_tax_class_id": 1,
+#       "manufacturers_id": 1,
+#       "products_ordered": 0
+# }
+
+
+
+###
+# {
+# 	"data":[
+# 		{
+#             "products_id": 1000,
+#             "products_quantity": 32,
+#             "products_model": "TestProduct-1000",
+#             "products_image": "matrox/mg200mms.gif",
+#             "products_price": 299.99,
+#             "products_date_added": "2022-07-28T08:19:29.000Z",
+#             "products_last_modified": null,
+#             "products_date_available": null,
+#             "products_weight": 23,
+#             "products_status": 1,
+#             "products_tax_class_id": 1,
+#             "manufacturers_id": 1,
+#             "products_ordered": 0
+# 		}
+# 	]
+# }
+
+###
+
+POST http://localhost:5000/a/create/
+Content-Type: application/json
+
+{
+      "id": 0,
+      "name": "abc1",
+      "name2": "abc2",
+      "id2": "123456"
+
+}
+
+###
+
+
+DELETE  http://localhost:5000/a/del/28
+ Content-Type: application/json
+###
+
+PUT  http://localhost:5000/a/put/
+Content-Type: application/json
+
+{
+      "id": 17,
+      "name": "ABC Data "
+}
+
+###
+GET   http://localhost:5000/auth/register/
+Content-Type: application/json
+
+    {
+        "customers_id": 0,
+        "customers_gender": "0",
+        "customers_firstname": "Cherdsak2",
+        "customers_lastname": "Puangsuk2",
+        "customers_dob": "",
+        "customers_email_address": "rundiae99@hotmail.com",
+        "customers_default_address_id": 0,
+        "customers_telephone": "",
+        "customers_fax": "",
+        "customers_password": "",
+        "customers_newsletter": ""
+    }
+###
+POST  http://localhost:5000/auth/register/
+Content-Type: application/json
+
+    {
+        "customers_id": 0,
+        "customers_gender": "0",
+        "customers_firstname": "rung1",
+        "customers_lastname": "rung1",
+        "customers_dob": "",
+        "customers_email_address": "rundiae100@hotmail.com",
+        "customers_default_address_id": 0,
+        "customers_telephone": "",
+        "customers_fax": "",
+        "customers_password": "1234",
+        "customers_newsletter": ""
+    }
+
+###
+
+POST  http://localhost:5000/auth/signin/
+Content-Type: application/json
+
+    {
+        "id": 11,
+        "email": "rundiae100@hotmail.com",
+        "password": "1234"
+    }
+
+###
+
+GET   http://localhost:5000/auth/validate/
+Content-Type: application/json
+Accept: application/json
+Authorization: '' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE4IHJ1bmRpYWUxMDhAaG90bWFpbC5jb20iLCJpYXQiOjE3MDYzMzQ5NjEsImV4cCI6MTcxNDExMDk2MX0.H5whpoCDT3B20zZgjKR5X9dKrWdC2m2pgMFQ40otDLc
+
+###
+###
+POST  http://localhost:5000/categories/create/
+Content-Type: application/json
+
+{
+    "categories_id":"1",
+    "categories_image":"image-categories/categories.jpg",
+    "parent_id":0,
+    "sort_order":0,
+    "date_added":"",
+    "last_modified":"",
+    "categories_detail":"วิศวกรรม และ สถาปัตยกรรม"
+}
+
+###
+
+POST http://localhost:5000/uploadmulter/categories
+Content-Type: multipart/form-data
+
+###
+
+POST  http://localhost:5000/uploadFilepdf-chkfs/
+Content-Type: application/json
+
+    {
+        "id": 11,
+        "email": "rundiae100@hotmail.com",
+        "password": "1234"
+    }
+
+###
+
+POST  http://localhost:5000/uploadFilepdf-chkpath
+Content-Type: application/json
+
+    {
+        
+        "url": "5c96b2c5-19d8-414b-9d47-09f3ab44ecfd_202402100530569201-274-Edit.pdf",
+        "pass": ""
+    }
+
+###
+//5c96b2c5-19d8-414b-9d47-09f3ab44ecfd_202402100530569201-274-Edit
+
+POST http://localhost:5000/auth/filpebook/
+Content-Type: application/json
+
+    {
+        
+        "id":0,
+        "email":"rundiae100@hotmail.com",
+        "password": "1234",
+        "passkey": "ODPID-36-71"
+    }
+

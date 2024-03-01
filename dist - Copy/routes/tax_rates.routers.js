@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const tax_rates_controllers_1 = require("../controllers/tax_rates.controllers");
+const router = (0, express_1.Router)();
+router.route('/tax_rates/getall/').get(tax_rates_controllers_1.get_tax_rates_all);
+router.route('/tax_rates/:id').get(tax_rates_controllers_1.get_tax_rates_byid);
+router.route('/tax_rates/create/').post(tax_rates_controllers_1.port_tax_rates);
+router.route('/tax_rates/put/').put(tax_rates_controllers_1.put_tax_rates);
+router.route('/tax_rates/del/').delete(tax_rates_controllers_1.delete_tax_rates);
+exports.default = router;

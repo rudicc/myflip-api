@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const zones_to_geo_zones_controllers_1 = require("../controllers/zones_to_geo_zones.controllers");
+const router = (0, express_1.Router)();
+router.route('/zones_to_geo_zones/getall/').get(zones_to_geo_zones_controllers_1.get_zones_to_geo_zones_all);
+router.route('/zones_to_geo_zones/:id').get(zones_to_geo_zones_controllers_1.get_zones_to_geo_zones_byid);
+router.route('/zones_to_geo_zones/create/').post(zones_to_geo_zones_controllers_1.port_zones_to_geo_zones);
+router.route('/zones_to_geo_zones/put/').put(zones_to_geo_zones_controllers_1.put_zones_to_geo_zones);
+router.route('/zones_to_geo_zones/del/').delete(zones_to_geo_zones_controllers_1.delete_zones_to_geo_zones);
+exports.default = router;

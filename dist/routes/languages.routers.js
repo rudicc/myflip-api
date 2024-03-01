@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const languages_controllers_1 = require("../controllers/languages.controllers");
+const router = (0, express_1.Router)();
+router.route('/languages/getall/').get(languages_controllers_1.get_languages_all);
+router.route('/languages/:id').get(languages_controllers_1.get_languages_byid);
+router.route('/languages/create/').post(languages_controllers_1.port_languages);
+router.route('/languages/put/').put(languages_controllers_1.put_languages);
+router.route('/languages/del/').delete(languages_controllers_1.delete_languages);
+exports.default = router;

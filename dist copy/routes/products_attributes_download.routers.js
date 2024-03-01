@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const products_attributes_download_controllers_1 = require("../controllers/products_attributes_download.controllers");
+const router = (0, express_1.Router)();
+router.route('/products_attributes_download/getall/').get(products_attributes_download_controllers_1.get_products_attributes_download_all);
+router.route('/products_attributes_download/:id').get(products_attributes_download_controllers_1.get_products_attributes_download_byid);
+router.route('/products_attributes_download/create/').post(products_attributes_download_controllers_1.port_products_attributes_download);
+router.route('/products_attributes_download/put/').put(products_attributes_download_controllers_1.put_products_attributes_download);
+router.route('/products_attributes_download/del/').delete(products_attributes_download_controllers_1.delete_products_attributes_download);
+exports.default = router;

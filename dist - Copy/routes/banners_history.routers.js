@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const banners_history_controllers_1 = require("../controllers/banners_history.controllers");
+const router = (0, express_1.Router)();
+router.route('/banners_history/getall/').get(banners_history_controllers_1.get_banners_history_all);
+router.route('/banners_history/:id').get(banners_history_controllers_1.get_banners_history_byid);
+router.route('/banners_history/create/').post(banners_history_controllers_1.port_banners_history);
+router.route('/banners_history/put/').put(banners_history_controllers_1.put_banners_history);
+router.route('/banners_history/del/').delete(banners_history_controllers_1.delete_banners_history);
+exports.default = router;

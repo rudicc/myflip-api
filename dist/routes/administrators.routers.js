@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const administrators_controllers_1 = require("../controllers/administrators.controllers");
+const router = (0, express_1.Router)();
+router.route('/administrators/getall/').get(administrators_controllers_1.get_administrators_all);
+router.route('/administrators/:id').get(administrators_controllers_1.get_administrators_byid);
+router.route('/administrators/create/').post(administrators_controllers_1.port_administrators);
+router.route('/administrators/put/').put(administrators_controllers_1.put_administrators);
+router.route('/administrators/del/:id').delete(administrators_controllers_1.delete_administrators);
+router.route('/administrators/delqsql/').delete(administrators_controllers_1.AdminExcuData);
+exports.default = router;

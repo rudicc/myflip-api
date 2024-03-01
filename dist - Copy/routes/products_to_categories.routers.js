@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const products_to_categories_controllers_1 = require("../controllers/products_to_categories.controllers");
+const router = (0, express_1.Router)();
+router.route('/products_to_categories/getall/').get(products_to_categories_controllers_1.get_products_to_categories_all);
+router.route('/products_to_categories/:id').get(products_to_categories_controllers_1.get_products_to_categories_byid);
+router.route('/products_to_categories/create/').post(products_to_categories_controllers_1.port_products_to_categories);
+router.route('/products_to_categories/put/').put(products_to_categories_controllers_1.put_products_to_categories);
+router.route('/products_to_categories/del/:id').delete(products_to_categories_controllers_1.delete_products_to_categories);
+exports.default = router;

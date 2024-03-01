@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const counter_history_controllers_1 = require("../controllers/counter_history.controllers");
+const router = (0, express_1.Router)();
+router.route('/counter_history/getall/').get(counter_history_controllers_1.get_counter_history_all);
+router.route('/counter_history/:id').get(counter_history_controllers_1.get_counter_history_byid);
+router.route('/counter_history/create/').post(counter_history_controllers_1.port_counter_history);
+router.route('/counter_history/put/').put(counter_history_controllers_1.put_counter_history);
+router.route('/counter_history/del/').delete(counter_history_controllers_1.delete_counter_history);
+exports.default = router;

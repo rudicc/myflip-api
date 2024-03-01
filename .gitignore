@@ -1,0 +1,16 @@
+/dist/node_modules
+/dist/build
+/dist/.pnp
+/dist/.pnp.js
+/dist/.DS_Store
+/dist/.env.local
+/dist/env.development.local
+/dist/.env.test.local
+/dist/.env.production.local
+
+/dist/npm-debug.log*
+/dist/yarn-debug.log*
+/dist/yarn-error.log*
+
+node_modules
+.env
