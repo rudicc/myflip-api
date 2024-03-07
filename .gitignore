@@ -14,3 +14,7 @@
 
 node_modules
 .env
+.vscode
+dist - Copy
+dist copy
+doc-1
