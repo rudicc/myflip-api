@@ -11,7 +11,7 @@ const SingInJWT = (user, callback) => {
     const jwt_secret = config_1.default.server.token.jwt_secret;
     try {
         jsonwebtoken_1.default.sign({
-            id: [user.id] + ' ' + [user.email]
+            id: user.id + ' ' + (user === null || user === void 0 ? void 0 : user.email)
         }, jwt_secret, {
             expiresIn: config_1.default.server.token.jwt_expires_in
         }, (error, token) => {

@@ -136,6 +136,7 @@ export async function signin(req: Request<{},any , USERS>, res: Response)  {
         }
 
         var sql = "select * from customers where customers_email_address = '" + [item.email] + "'";
+       
         conn.query(sql, async (error, result) => {	 
             if (error) {	 
                 console.log(error);	 	 
@@ -145,14 +146,17 @@ export async function signin(req: Request<{},any , USERS>, res: Response)  {
 
             } else { 	 
                 console.log(result) ;  
-                if(result[0]==null){
+          /*      if(result[0].customers_id==null){
                     return res.status(401).json({                
                         success: false,                	 
                         message:  'Data not found.',
                     });
                 } 
-                                                  	 
+          */                                     	 
                 //var da = JSON.parse(JSON.stringify(data)); res.send(da) ; 
+
+                console.log(result[0].customers_id);
+
                 if (!(await bcrypt.compare(item.password, result[0].customers_password))) {
                     console.log("Bcrypt not sucess ! Please Enter Your Email and Password");
                     return res.status(401).json({                        
@@ -162,21 +166,43 @@ export async function signin(req: Request<{},any , USERS>, res: Response)  {
                     
                      item.id = result[0].customers_id;
 
-                    SingInJWT(item,(_error , token) =>{
-                        if(_error){
-                            return res.status(401).json({
-                                msg: 'Unable to Sign',
-                                error: _error
-                            })
-                        } else if (token){
-                            return res.status(200).json({
-                                msg: 'Auth Successful',
-                                token, 
-                                user: result[0].customers_firstname,
-                                uid: result[0].customers_id
-                            })
-                        } 
-                    })
+                     const jwt_secret:string = config.server.token.jwt_secret as string;
+                     const token = jwt.sign({ id: item.id }, jwt_secret, {
+                        expiresIn: config.server.token.jwt_expires_in,
+                     });
+
+                     console.log(token);
+
+                     if (token){
+                         return res.status(200).json({
+                            msg: 'Auth Successful',
+                            token, 
+                            user: result[0].customers_firstname,
+                            uid: result[0].customers_id
+                        });
+
+                    }else{
+                        return res.status(401).json({
+                            msg: 'Unable to Sign',
+                            error: "Not token"
+                        })
+                    }
+
+                    // SingInJWT(item,(_error , token) =>{
+                    //     if(_error){
+                    //         return res.status(401).json({
+                    //             msg: 'Unable to Sign',
+                    //             error: _error
+                    //         })
+                    //     } else if (token){
+                    //         return res.status(200).json({
+                    //             msg: 'Auth Successful',
+                    //             token, 
+                    //             user: result[0].customers_firstname,
+                    //             uid: result[0].customers_id
+                    //         })
+                    //     } 
+                    // })
                 }                
             }	 
         });	 

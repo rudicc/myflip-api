@@ -14,9 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.signinUserFilpbook = exports.signinAddmin = exports.signinPlunge = exports.validateToken = exports.signin = exports.registers = exports.get_user = void 0;
 const mydbcommand_1 = require("../dbconfig/mydbcommand");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const config_1 = __importDefault(require("../dbconfig/config"));
 const sign_jwt_1 = __importDefault(require("../functions/sign.jwt"));
 function get_user(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -141,13 +143,15 @@ function signin(req, res) {
                 }
                 else {
                     console.log(result);
-                    if (result[0] == null) {
-                        return res.status(401).json({
-                            success: false,
-                            message: 'Data not found.',
-                        });
-                    }
+                    /*      if(result[0].customers_id==null){
+                              return res.status(401).json({
+                                  success: false,
+                                  message:  'Data not found.',
+                              });
+                          }
+                    */
                     //var da = JSON.parse(JSON.stringify(data)); res.send(da) ; 
+                    console.log(result[0].customers_id);
                     if (!(yield bcryptjs_1.default.compare(item.password, result[0].customers_password))) {
                         console.log("Bcrypt not sucess ! Please Enter Your Email and Password");
                         return res.status(401).json({
@@ -156,22 +160,40 @@ function signin(req, res) {
                     }
                     else if (result) {
                         item.id = result[0].customers_id;
-                        (0, sign_jwt_1.default)(item, (_error, token) => {
-                            if (_error) {
-                                return res.status(401).json({
-                                    msg: 'Unable to Sign',
-                                    error: _error
-                                });
-                            }
-                            else if (token) {
-                                return res.status(200).json({
-                                    msg: 'Auth Successful',
-                                    token,
-                                    user: result[0].customers_firstname,
-                                    uid: result[0].customers_id
-                                });
-                            }
+                        const jwt_secret = config_1.default.server.token.jwt_secret;
+                        const token = jsonwebtoken_1.default.sign({ id: item.id }, jwt_secret, {
+                            expiresIn: config_1.default.server.token.jwt_expires_in,
                         });
+                        console.log(token);
+                        if (token) {
+                            return res.status(200).json({
+                                msg: 'Auth Successful',
+                                token,
+                                user: result[0].customers_firstname,
+                                uid: result[0].customers_id
+                            });
+                        }
+                        else {
+                            return res.status(401).json({
+                                msg: 'Unable to Sign',
+                                error: "Not token"
+                            });
+                        }
+                        // SingInJWT(item,(_error , token) =>{
+                        //     if(_error){
+                        //         return res.status(401).json({
+                        //             msg: 'Unable to Sign',
+                        //             error: _error
+                        //         })
+                        //     } else if (token){
+                        //         return res.status(200).json({
+                        //             msg: 'Auth Successful',
+                        //             token, 
+                        //             user: result[0].customers_firstname,
+                        //             uid: result[0].customers_id
+                        //         })
+                        //     } 
+                        // })
                     }
                 }
             }));

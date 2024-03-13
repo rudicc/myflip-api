@@ -10,7 +10,7 @@ const SingInJWT = (user: USERS, callback: (error: Error | null, token: string | 
         try{
                 jwt.sign(
                     {
-                        id: [user.id] + ' ' + [user.email]
+                        id: user.id + ' ' + user?.email
                     }, 
                         jwt_secret,
                     {
