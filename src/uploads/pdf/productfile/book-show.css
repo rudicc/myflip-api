@@ -1,0 +1,95 @@
+
+.sbodyshow{
+    background-image: url(../productfile/bg.jpg);
+}
+
+.b-book-showcase {
+    /* background: linear-gradient( g0deg,#fff,#eee ); */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    position: relative;
+    
+}
+
+.b-book-showcase::before {
+    content: '';
+    position: absolute;
+    top: -30vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* background: radial-gradient( #fff,#e4e4e4 ); */
+}
+
+.w-wrapper {
+    perspective: 1000px;
+   /* perspective: 200px;*/
+}
+
+.b-book {
+    transform-style: preserve-3d;
+    width: 27.0625em;
+    height: 40.5em;
+    /*Center the book*/
+    transform-origin: 13.53125em 4.375em;
+    position: relative;
+}
+
+    .b-book > div {
+        position: absolute;
+        height: 40.5em;
+    }
+/*Positioning each side in 3D space*/
+.f-front {
+    /*  width: 27.0625em;*/
+    width: 27.0625em;
+    transform: translate3d(0,0,2.1875em);
+    object-fit: fill;
+    background-color: #ccc;
+    /* background:url()*/
+}
+
+.b-back {
+    width: 27.0625em;
+    transform: rotateY(180deg) translate3d(0,0,2.1875em);
+    background-color: #ccc;
+     /* background:url(../productfile/bg.jpg); */
+}
+
+.s-side {
+    width: 4.375em;
+    transform: rotateY(-90deg) translate3d(0, 0, 2.1875em );
+    /* background:url()*/
+    /* background:url(../productfile/bg.jpg); */
+    background-color: #ccc;
+}
+
+
+
+.s-shadow {
+    display: block;
+}
+
+.p-pages {
+    width: 4.375em;
+    background: #ccc;
+    transform: rotateY(90deg) translate3d(0,0,24.9em);
+    transform-origin: bottom;
+}
+
+.b-book .s-shadow {
+    width: 27.0625em;
+    height: 4.375em;
+    background: radial-gradient(rgba(0,0,0,0.4)transparent);
+    transform: rotateX(90deg) translate3d(0,2.1875em,-38em);
+    transform-origin: bottom;
+}
+
+.f-front, .b-back, .s-side {
+    background-size: cover;
+    /*Prevents Defoult Image Dragging*/
+    pointer-events: none;
+}

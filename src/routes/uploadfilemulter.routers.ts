@@ -24,6 +24,9 @@ import multer from 'multer'
     //uploadFilePlungeFilpBook
     router.post('/uploadFileFilpTemp', uploads.single('file'), FileController.uploadFilePlungeFilpBook);
 
+    //uploadFileScript
+    router.post('/uploadFileScript', uploads.single('file'), FileController.uploadFileScript);
+
    // fs
     router.post('/uploadFilepdf-chkfs', FileController.chkFs);
   //cut file pdf

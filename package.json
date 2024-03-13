@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "server": "nodemon index.ts",
-    "build": "rimraf dist && npx tsc &&  start",
+    "build": "rimraf dist && npx tsc && start", 
     "start": "node dist/index.js",
     "dev": "concurrently \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1"

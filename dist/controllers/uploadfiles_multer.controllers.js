@@ -397,6 +397,41 @@ class FileController {
             }
         });
     }
+    uploadFileScript(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const conn = yield (0, mydbcommand_1.connect)();
+                const { file } = req;
+                console.log(file);
+                console.log(file === null || file === void 0 ? void 0 : file.originalname);
+                console.log(file === null || file === void 0 ? void 0 : file.size);
+                console.log(file === null || file === void 0 ? void 0 : file.buffer);
+                const _f = `${file === null || file === void 0 ? void 0 : file.originalname}`;
+                const _s = (file === null || file === void 0 ? void 0 : file.size);
+                //file name 
+                const timeStamp = new Date().toISOString().replace(/[-:.TZ]/g, "");
+                const uniqueFileName = `${file === null || file === void 0 ? void 0 : file.originalname}`;
+                console.log(`${__dirname}/../uploads/pdf/productfile/${uniqueFileName}`);
+                (0, CreactFolder_1.DelfileFolder)(`${__dirname}/../uploads/pdf/productfile/${uniqueFileName}`);
+                const fileStream = fs_1.default.createWriteStream(`${__dirname}/../uploads/pdf/productfile/${uniqueFileName}`);
+                fileStream.write(file === null || file === void 0 ? void 0 : file.buffer, 'base64');
+                fileStream.on('error', () => {
+                    console.log('error occurred while writing to stream');
+                });
+                fileStream.end();
+                return res.status(200).json({
+                    success: true,
+                    message: 'Success!',
+                });
+            }
+            catch (error) {
+                res.json({
+                    success: false,
+                    message: 'Error uploading file : ' + error
+                });
+            }
+        });
+    }
     chkFs(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

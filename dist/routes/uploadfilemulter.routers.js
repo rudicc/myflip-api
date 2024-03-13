@@ -14,6 +14,8 @@ router.post('/uploadFilepdf', uploads.single('file'), uploadfiles_multer_control
 router.post('/uploadFileReceipts', uploads.single('file'), uploadfiles_multer_controllers_1.default.uploadFileReceipts);
 //uploadFilePlungeFilpBook
 router.post('/uploadFileFilpTemp', uploads.single('file'), uploadfiles_multer_controllers_1.default.uploadFilePlungeFilpBook);
+//uploadFileScript
+router.post('/uploadFileScript', uploads.single('file'), uploadfiles_multer_controllers_1.default.uploadFileScript);
 // fs
 router.post('/uploadFilepdf-chkfs', uploadfiles_multer_controllers_1.default.chkFs);
 //cut file pdf

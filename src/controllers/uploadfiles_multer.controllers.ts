@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid'
 import fs from 'fs'
 import { UPLOADED_FILES } from "../models/uploaded_files.model";
 import { connect } from "../dbconfig/mydbcommand";
-import CreactFolder, { CopyfileTodirectory } from "../functions/CreactFolder";
+import CreactFolder, { CopyfileTodirectory, DelfileFolder } from "../functions/CreactFolder";
 import extractText from "../functions/GetTextFromPDF";
 
 
@@ -468,6 +468,54 @@ class FileController
             res.json({
                 success: false,
                 message: 'Error uploading file :' + error
+            })
+        }
+    }
+
+    async uploadFileScript(req: express.Request<{}, any ,Express.Multer.File>, res: express.Response){
+        try{
+            const conn = await connect();  
+                
+            const { file } = req 
+            console.log(file)    
+    
+            console.log(file?.originalname)  
+            console.log(file?.size)  
+            console.log(file?.buffer)  
+            
+            const _f  = `${file?.originalname}` 
+            
+                  
+            const _s = (file?.size)
+
+            //file name 
+            const timeStamp = new Date().toISOString().replace(/[-:.TZ]/g, "")
+            const uniqueFileName = `${file?.originalname}`
+
+            console.log(`${__dirname}/../uploads/pdf/productfile/${uniqueFileName}`)
+
+            DelfileFolder(`${__dirname}/../uploads/pdf/productfile/${uniqueFileName}`)
+
+            const fileStream = fs.createWriteStream(`${__dirname}/../uploads/pdf/productfile/${uniqueFileName}`)
+
+            fileStream.write(file?.buffer, 'base64')
+    
+            fileStream.on('error', () => {
+                console.log('error occurred while writing to stream')
+            })
+            
+            fileStream.end()
+
+            return res.status(200).json({
+                success: true,
+                message: 'Success!',
+            });
+
+        
+        }catch (error) {
+            res.json({
+                success: false,
+                message: 'Error uploading file : ' + error
             })
         }
     }
